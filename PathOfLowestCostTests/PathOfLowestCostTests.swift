@@ -15,6 +15,7 @@ class PathOfLowestCostTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        DataManager.sharedInstance.clear()
     }
     
     override func tearDown() {
@@ -116,6 +117,26 @@ class PathOfLowestCostTests: XCTestCase {
         XCTAssertEqual("Yes", DataManager.sharedInstance.resultforWholeGridTraversing)
         XCTAssertEqual("15", DataManager.sharedInstance.arrayForCostAndPath?[0])
         XCTAssertEqual("2213", DataManager.sharedInstance.arrayForCostAndPath?[1])
-        
+    }
+    
+    //MARK:-  Test for 3 x 5 Grid - Random Grid
+    
+    func testFindPathForMinimumcostForExample3x5Grid() {
+        let aGrid = [[69, 10, 19, 10, 19], [51, 23, 20, 19, 12], [60, 12, 20, 11, 10]]
+        let costAlgo = LowestCostAlogirthm()
+        costAlgo.findAllPathsForGrid(aGrid: aGrid, rows: 3, coloumns: 5)
+        XCTAssertNil(DataManager.sharedInstance.resultforWholeGridTraversing)
+        XCTAssertNil(DataManager.sharedInstance.arrayForCostAndPath?.first)
+    }
+    
+    //MARK:-  Test for 3 x 4 Grid - Grid With Negative Values
+    
+    func testFindPathForMinimumcostForGridWithNegatives() {
+        let aGrid = [[60, 3, 3, 6], [6, -3, 7, 9], [5, 6, -8, 3]]
+        let costAlgo = LowestCostAlogirthm()
+        costAlgo.findAllPathsForGrid(aGrid: aGrid, rows: 3, coloumns: 4)
+        XCTAssertEqual("Yes", DataManager.sharedInstance.resultforWholeGridTraversing)
+        XCTAssertEqual("-2", DataManager.sharedInstance.arrayForCostAndPath?[0])
+        XCTAssertEqual("2233", DataManager.sharedInstance.arrayForCostAndPath?[1])
     }
 }

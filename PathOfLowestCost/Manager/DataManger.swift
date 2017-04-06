@@ -14,7 +14,7 @@ class DataManager {
     
     //MARK:- Local Variable
     var arrayForCostAndPath : [String]? = nil
-    var resultforWholeGridTraversing: String?
+    var resultforWholeGridTraversing: String? = nil
     
     //MARK:- Init
     convenience init() {
@@ -30,6 +30,6 @@ class DataManager {
     //MARK:- To clear data once the output is recieved
     func clear() {
         arrayForCostAndPath?.removeAll()
-        resultforWholeGridTraversing = ""
+        resultforWholeGridTraversing = nil
     }
 }

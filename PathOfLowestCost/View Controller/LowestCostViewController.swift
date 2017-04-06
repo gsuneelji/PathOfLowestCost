@@ -40,9 +40,20 @@ class LowestCostViewController: UIViewController {
                 let coloumn = resultGrid?.a2dArray[0].count
                 lowestCostAlogirthm.findAllPathsForGrid(aGrid: (resultGrid?.a2dArray)!, rows: row!, coloumns: coloumn!)
                 
-                minimumCostLabel.text!  = (DataManager.sharedInstance.arrayForCostAndPath?[0])!
-                rowTraversedInMatrixLabel.text!  = (DataManager.sharedInstance.arrayForCostAndPath?[1])!
-                resultLabel.text! = (DataManager.sharedInstance.resultforWholeGridTraversing)!
+                if let arrayForCostAndPath = DataManager.sharedInstance.arrayForCostAndPath,  arrayForCostAndPath.count > 1 {
+                    minimumCostLabel.text = DataManager.sharedInstance.arrayForCostAndPath?[0]
+                    rowTraversedInMatrixLabel.text = DataManager.sharedInstance.arrayForCostAndPath?[1]
+                } else{
+                    minimumCostLabel.text = "0"
+                    rowTraversedInMatrixLabel.text = "[]"
+                }
+                
+                if let isMatrixTraversed = DataManager.sharedInstance.resultforWholeGridTraversing, isMatrixTraversed.lowercased() == "yes" {
+                    resultLabel.text = isMatrixTraversed
+                } else {
+                    resultLabel.text = "No"
+                }
+                
                 DataManager.sharedInstance.clear()
             } else {
                 let alert = UIAlertController(title: Constants.Errors.invalidInput, message:Constants.Errors.errorText,preferredStyle: UIAlertControllerStyle.alert)
